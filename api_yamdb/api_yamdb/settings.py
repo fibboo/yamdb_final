@@ -11,7 +11,7 @@ env = environ.Env(
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', default='YOUR-DJANGO-PROJECT-SECRET-KEY')
+SECRET_KEY = env('SECRET_KEY_YAMDB', default='YOUR-DJANGO-PROJECT-SECRET-KEY')
 
 ADMIN_EMAIL = 'admin@mail.ru'
 
@@ -76,7 +76,7 @@ DATABASES = {
         'ENGINE': env(
             'DB_ENGINE', default='django.db.backends.postgresql'
         ),
-        'NAME': env('DB_NAME', default='postgres'),
+        'NAME': env('DB_NAME_YAMDB', default='postgres_yamdb'),
         'USER': env('POSTGRES_USER', default='postgres'),
         'PASSWORD': env('POSTGRES_PASSWORD', default='password'),
         'HOST': env('DB_HOST', default='db'),
@@ -118,11 +118,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = '/static/'
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
+STATIC_URL = '/static/yamdb/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/yamdb/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 

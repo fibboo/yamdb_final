@@ -7,12 +7,22 @@ services:
       - /var/lib/postgresql/data/
     env_file:
       - ./.env
-  web:
+  yatube:
+    image: fibboo/yatube:latest
+    restart: always
+    volumes:
+      - static_value_yatube:/app/static/yatube/
+      - media_value_yatube:/app/media/yatube/
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+  yamdb:
     image: fibboo/api_yamdb:latest
     restart: always
     volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/ 
+      - static_value_yamdb:/app/static/yamdb/
+      - media_value_yamdb:/app/media/yamdb/
     depends_on:
       - db
     env_file:
@@ -21,13 +31,28 @@ services:
     image: nginx:1.21.3-alpine
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - static_value:/var/html/static/
-      - media_value:/var/html/media/
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/html/certbot
+      - static_value_yatube:/app/static/yatube/
+      - media_value_yatube:/app/media/yatube/
+      - static_value_yamdb:/app/static/yamdb/
+      - media_value_yamdb:/app/media/yamdb/
     depends_on:
-      - web
+      - yatube
+      - yamdb
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/html/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
-  static_value:
-  media_value:
+  static_value_yatube:
+  media_value_yatube:
+  static_value_yamdb:
+  media_value_yamdb:

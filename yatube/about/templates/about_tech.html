@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Технологии{% endblock %}
+{% block header %}Технологии{% endblock %}
+{% block content %}
+
+    {% load static %}
+
+    <div class="row">
+        <!-- Левый вспомогательный блок -->
+        <div class="col-md-3 mb-3 mt-1">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% include 'avatar_ad_links.html' %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Тело страницы -->
+        <div class="col-md-9">
+            <div class="card-body">
+                <div class="card-text">
+                    <p>Python и Django наше все!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

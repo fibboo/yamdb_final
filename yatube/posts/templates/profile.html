@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Профиль {{ author.username }}{% endblock %}
+{% block header %}Профиль {{ author.username }}{% endblock %}
+{% block content %}
+
+    {% include 'paginator.html' %}
+
+    <div class="row">
+
+        {% include 'author.html' with author=author following=following %}
+
+        <div class="col-md-9">
+                {% for post in page %}
+                    {% include 'post_item.html' with post=post %}
+                {% endfor %}
+
+            {% include 'paginator.html' %}
+
+        </div>
+    </div>
+
+{% endblock %}
