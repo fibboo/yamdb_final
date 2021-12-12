@@ -1,4 +1,4 @@
-name: Build, test, update docker hub rep and deploy
+name: yamdb Build, test, update docker hub rep and deploy
 
 on:
   push:
