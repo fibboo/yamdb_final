@@ -5,11 +5,11 @@ django-environ==0.8.1
 idna==2.8                 # via requests
 pillow
 pyparsing==2.4.6          # via packaging
-pytz==2019.3              # via django
+pytz==2020.1             # via django
 requests==2.22.0
 six==1.14.0               # via packaging
 sorl-thumbnail==12.6.3
-sqlparse==0.3.0           # via django
+sqlparse==0.3.1           # via django
 urllib3==1.25.6           # via requests
 zipp==2.2.0               # via importlib-metadata
 mixer==7.1.2
