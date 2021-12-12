@@ -1,13 +1,17 @@
 import os
 
 import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 
 env = environ.Env(
     DEBUG=(bool, False)
 )
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -74,16 +78,20 @@ WSGI_APPLICATION = 'yatube.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.NumericPasswordValidator',
     },
 ]
 
@@ -125,3 +133,76 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+if DEBUG is True:
+    ALLOWED_HOSTS = [
+        '*'
+    ]
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
+    ADMINS = [('admin', 'admin@site.com')]
+
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+
+    # Logging
+
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'filters': {
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue',
+            },
+        },
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+                'filters': ['require_debug_true'],
+            },
+        },
+        'loggers': {
+            'mylogger': {
+                'handlers': ['console'],
+                'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+                'propagate': True,
+            },
+        },
+    }
+else:
+    sentry_sdk.init(
+        dsn=env('SENTRY_DNS', default='you-sentry-dns'),
+        integrations=[DjangoIntegration()],
+    )
+
+    ALLOWED_HOSTS = [
+        '*'
+    ]
+
+    DATABASES = {
+        'default': {
+            'ENGINE': env(
+                'DB_ENGINE', default='django.db.backends.postgresql'
+            ),
+            'NAME': env('DB_NAME_YATUBE', default='postgres_yatube'),
+            'USER': env('POSTGRES_USER', default='postgres'),
+            'PASSWORD': env('POSTGRES_PASSWORD', default='password'),
+            'HOST': env('DB_HOST', default='db'),
+            'PORT': env('DB_PORT', default='5432')
+        }
+    }
+
+    ADMINS = [x.split(':') for x in env.list('DJANGO_ADMINS')]
+
+    EMAIL_HOST = env('EMAIL_HOST', default='smtp.example-mail.com')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='you-password')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='username')
+    EMAIL_PORT = env('EMAIL_PORT', default=465)
+    EMAIL_USE_SSL = env('EMAIL_USE_SSL', default=True)
+    DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='admin@site.com')

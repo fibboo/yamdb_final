@@ -77,11 +77,6 @@ jobs:
             sudo docker image rm fibboo/yatube:latest
             sudo docker image rm fibboo/api_yamdb:latest
             sudo docker-compose up -d
-            sudo docker-compose exec -T yatube python3 manage.py migrate
-            sudo docker-compose exec -T yatube python3 manage.py collectstatic --no-input
-            sudo docker-compose exec -T yamdb python3 manage.py migrate
-            sudo docker-compose exec -T yamdb python3 manage.py collectstatic --no-input
-            sudo docker image prune -f
 
   send_message:
     runs-on: ubuntu-latest
