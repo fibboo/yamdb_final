@@ -39,6 +39,9 @@ EMAIL_PORT = env('EMAIL_PORT', default=465)
 EMAIL_USE_SSL = env('EMAIL_USE_SSL', default=True)
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='admin@site.com')
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+
 STATIC_URL = '/static/yatube/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
