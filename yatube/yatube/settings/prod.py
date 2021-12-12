@@ -24,7 +24,7 @@ DATABASES = {
         ),
         'NAME': env('DB_NAME_YATUBE', default='postgres_yatube'),
         'USER': env('POSTGRES_USER', default='postgres'),
-        'PASSWORD': env('POSTGRES_PASSWORD_', default='password'),
+        'PASSWORD': env('POSTGRES_PASSWORD', default='password'),
         'HOST': env('DB_HOST', default='db'),
         'PORT': env('DB_PORT', default='5432')
     }
