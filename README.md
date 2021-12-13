@@ -1,44 +1,40 @@
-# yamdb_final
 ![example workflow](https://github.com/fibboo/yamdb_final/actions/workflows/yamdb_workflow.yaml/badge.svg)
 
-### About:
-Cool project with wise API
+# yatube and yamdb merged
+## About:
+I merged two different projects to deploy them together on one server.<br>
+Both are work with https. <br><br>
+yatube you can visit here https://fibboo.space/ <br>
+yamdb is avaliable here https://yamdb.fibboo.space/redoc/
 
 ### Requirements:
-docker https://docs.docker.com/engine/install/
-
-### .env template:
-```
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=postgres
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=you_password
-DB_HOST=db
-DB_PORT=5432
-SECRET_KEY='you_secret_key'
-```
+docker https://docs.docker.com/engine/install/ <br>
+docker-compose https://docs.docker.com/compose/install/
 
 ### Как запустить проект:
 
 Clone project and cd to infra
 ```
 git clone git@github.com:fibboo/infra_sp2.git
-cd infra
 ```
-Run with docker-composer
+Create .env file as in the template infra/.env.template <br>
+Change first and second level domains in infra/nginx/default.conf to yours <br>
+Don't forget to set up DNS with your domain registrar<br>
+Copy infra/ folder to you server
 ```
-docker-composer up -d
+scp -r infra/ user@your-server-ip:/home/user/
 ```
-Migrate, create superuser and collect static
+Login to your server, and run init-letsencrypt.sh. This script will get ssl for your domains
 ```
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser
-docker-compose exec web python manage.py collectstatic --no-input
+ssh user@your-server-ip
+chmod +x init-letsencrypt.sh
+sudo ./init-letsencrypt.sh
 ```
-Go to check docs http://localhost/redoc/
+Push for magic to happen
 
-### If you what to export demo data:
-```
-docker-compose exec web python manage.py loaddata fixtures.
-``` 
+### Thanks
+Thank Phillip for his instruction on how to get ssl with nginx, Let’s Encrypt, certbot and Docker https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71 <br>
+I https://github.com/mrts/docker-postgresql-multiple-databases to do multipl databases on postgres with Docker
 
+### About me
+You can read here https://fibboo.space/about/author/
