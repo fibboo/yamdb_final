@@ -32,6 +32,18 @@ sudo ./init-letsencrypt.sh
 ```
 Push for magic to happen
 
+After first deploy migrate and collect static.
+```
+sudo docker-compose exec yatube python manage.py migrate
+sudo docker-compose exec yamdb python manage.py migrate
+sudo docker-compose exec yatube python manage.py collectstatic
+sudo docker-compose exec yamdb python manage.py collectstatic
+```
+If you want demo data for yatube you can load dump.json
+```
+sudo docker-compose exec yatube python manage.py loaddata dump.json
+```
+
 ### Thanks
 Thank Phillip for his instruction on how to get ssl with nginx, Let’s Encrypt, certbot and Docker https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71 <br>
 I https://github.com/mrts/docker-postgresql-multiple-databases to do multipl databases on postgres with Docker
