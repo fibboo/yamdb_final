@@ -11,7 +11,7 @@ yamdb is avaliable here https://yamdb.fibboo.space/redoc/
 docker https://docs.docker.com/engine/install/ <br>
 docker-compose https://docs.docker.com/compose/install/
 
-### Как запустить проект:
+### How to run:
 
 Clone project and cd to infra
 ```
