@@ -1,4 +1,4 @@
-![example workflow](https://github.com/fibboo/yamdb_final/actions/workflows/yamdb_workflow.yaml/badge.svg)
+![example workflow](https://github.com/fibboo/yatube-yamdb/actions/workflows/yamdb_workflow.yaml/badge.svg)
 
 # yatube and yamdb merged
 ## About:
