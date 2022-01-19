@@ -15,7 +15,7 @@ docker-compose https://docs.docker.com/compose/install/
 
 Clone project and cd to infra
 ```
-git clone git@github.com:fibboo/infra_sp2.git
+git clone git@github.com:fibboo/yatube-yamdb.git
 ```
 Create .env file as in the template infra/.env.template <br>
 Change first and second level domains in infra/nginx/default.conf to yours <br>
