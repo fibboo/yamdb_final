@@ -7,11 +7,11 @@ Both are work with https. <br><br>
 yatube you can visit here https://fibboo.space/ <br>
 yamdb is avaliable here https://yamdb.fibboo.space/redoc/
 
-### Requirements:
+## Requirements:
 docker https://docs.docker.com/engine/install/ <br>
 docker-compose https://docs.docker.com/compose/install/
 
-### How to run:
+## How to run:
 
 Clone project and cd to infra
 ```
@@ -44,9 +44,9 @@ If you want demo data for yatube you can load dump.json
 sudo docker-compose exec yatube python manage.py loaddata dump.json
 ```
 
-### Thanks
+## Thanks
 Thank Phillip for his instruction on how to get ssl with nginx, Let’s Encrypt, certbot and Docker https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71 <br>
 I https://github.com/mrts/docker-postgresql-multiple-databases to do multipl databases on postgres with Docker
 
-### About me
+## About me
 You can read here https://fibboo.space/about/author/
