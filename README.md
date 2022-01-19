@@ -3,9 +3,13 @@
 # yatube and yamdb merged
 ## About:
 I merged two different projects to deploy them together on one server.<br>
-Both are work with https. <br><br>
-yatube you can visit here https://fibboo.space/ <br>
-yamdb is avaliable here https://yamdb.fibboo.space/redoc/
+Both are work with https.
+### yatube
+It is some kind of social network. Made on pure Django. <br>
+You can look demo https://fibboo.space/
+### yamdb
+It is an API service for creating and managing data base of works of art. Made on Django REST Framework. <br>
+You can look demo https://yamdb.fibboo.space/redoc/
 
 ## Requirements:
 docker https://docs.docker.com/engine/install/ <br>
@@ -46,7 +50,7 @@ sudo docker-compose exec yatube python manage.py loaddata dump.json
 
 ## Thanks
 Thank Phillip for his instruction on how to get ssl with nginx, Let’s Encrypt, certbot and Docker https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71 <br>
-I https://github.com/mrts/docker-postgresql-multiple-databases to do multipl databases on postgres with Docker
+I used https://github.com/mrts/docker-postgresql-multiple-databases to do multipl databases on postgres with Docker
 
 ## About me
 You can read here https://fibboo.space/about/author/
