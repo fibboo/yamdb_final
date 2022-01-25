@@ -40,6 +40,7 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/html/certbot
+      - ./crm:/var/html/crm
       - static_value_yatube:/var/html/static/yatube/
       - media_value_yatube:/var/html/media/yatube/
       - static_value_yamdb:/var/html/static/yamdb/
