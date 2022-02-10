@@ -1,5 +1,5 @@
 asgiref==3.2.10
-django==2.2.25
+django==2.2.27
 django-filter==2.4.0
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.8.0
